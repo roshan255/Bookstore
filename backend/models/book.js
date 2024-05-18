@@ -7,3 +7,5 @@ const bookSchema = new mongoose.Schema({
   sellCount: { type: Number, default: 0 },
 });
 const Book = mongoose.model("Book", bookSchema);
+
+module.exports = Book;

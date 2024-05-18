@@ -10,3 +10,5 @@ const PurchaseHistory = mongoose.model(
   "PurchaseHistory",
   purchaseHistorySchema
 );
+
+module.exports = PurchaseHistory;

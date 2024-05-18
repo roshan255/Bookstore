@@ -1,22 +1,31 @@
-const expres = require("express");
-const admin = require("./routes/admin");
-const retail = require("./routes/retail");
-const author = require("./routes/author");
+const express = require("express");
+const session = require("express-session");
+const flash = require("connect-flash");
+const passport = require("./config/passport");
+const auth = require("./routes/auth");
 const connectDb = require("./db/connet");
 require("dotenv").config();
-const PORT = 5000;
 
-app = expres();
+app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(
+  session({
+    secret: process.env.SESSION_KEY,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(express.static("./public"));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
-app.use(expres.json());
-
-app.use("/admin", admin);
-app.use("/retail", retail);
-app.use("/author", author);
+app.use("/", auth);
 
 const startServer = async () => {
   try {
-    await connectDb().then(() => console.log("conneted to DataBase"));
+    await connectDb().then(() => console.log("conneted to Database"));
     app.listen(process.env.PORT, () =>
       console.log(`server is running on port ${process.env.PORT}`)
     );

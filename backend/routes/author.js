@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const ensureRole = require("../middleware/roleCheck");
 
-router.get("/", (req, res) => {
+router.get("/", ensureRole("author"), (req, res) => {
   res.send("This is author page");
 });
 
