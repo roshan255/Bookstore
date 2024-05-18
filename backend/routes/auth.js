@@ -5,6 +5,7 @@ const author = require("./author");
 const admin = require("./admin");
 const retail = require("./retail");
 const router = express.Router();
+const ensureRole = require("../middleware/roleCheck");
 
 router.post("/register", async (req, res) => {
   try {
@@ -32,8 +33,8 @@ router.post("/login", passport.authenticate("local"), (req, res) => {
       res.redirect("/login");
   }
 });
-router.use("/admin", admin);
-router.use("/retail", retail);
-router.use("/author", author);
+router.use("/admin", ensureRole("admin"), admin);
+router.use("/retail", ensureRole("admin"), retail);
+router.use("/author", ensureRole("admin"), author);
 
 module.exports = router;

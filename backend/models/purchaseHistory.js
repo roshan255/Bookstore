@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const purchaseHistorySchema = new mongoose.Schema({
   purchaseId: { type: String, unique: true, required: true },
   bookId: { type: String, required: true },

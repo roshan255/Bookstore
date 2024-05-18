@@ -1,9 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const ensureRole = require("../middleware/roleCheck");
+const {
+  createBook,
+  getBooks,
+  updateSellCount,
+} = require("../controllers/book");
 
-router.get("/", ensureRole("admin"), (req, res) => {
+router.get("/", (req, res) => {
   res.send("This is admin page");
 });
+router.post("/books", createBook);
+router.get("/books", getBooks);
+router.put("/sellCount", updateSellCount);
 
 module.exports = router;
