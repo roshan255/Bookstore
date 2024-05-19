@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { sendRevenueEmails } = require("../controllers/revenue");
 const {
   createBook,
   getBooks,
@@ -12,5 +13,6 @@ router.get("/", (req, res) => {
 router.post("/books", createBook);
 router.get("/books", getBooks);
 router.put("/sellCount", updateSellCount);
+router.post("/sendRevenueEmails", sendRevenueEmails);
 
 module.exports = router;

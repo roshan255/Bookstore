@@ -34,7 +34,7 @@ router.post("/login", passport.authenticate("local"), (req, res) => {
   }
 });
 router.use("/admin", ensureRole("admin"), admin);
-router.use("/retail", ensureRole("admin"), retail);
-router.use("/author", ensureRole("admin"), author);
+router.use("/retail", ensureRole("retail"), retail);
+router.use("/author", ensureRole("author"), author);
 
 module.exports = router;
